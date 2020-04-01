@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class category(models.Model):
+class Category(models.Model):
     STATUS =(
 
         ('True', 'Evet'),
@@ -19,3 +19,24 @@ class category(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class News(models.Model):
+    STATUS =(
+
+        ('True', 'Evet'),
+        ('False', 'Hayır'),
+    )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE) #relations with Category
+    title = models.CharField(max_length=40)
+    description = models.CharField(max_length=200)
+    keyword = models.CharField(max_length=200)
+    image = models.ImageField(blank=True, upload_to='images/')
+    detail = models.TextField()
+    status = models.CharField(max_length=10, choices=STATUS)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
