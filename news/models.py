@@ -28,7 +28,7 @@ class News(models.Model):
         ('False', 'Hayır'),
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE) #relations with Category
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=150)
     description = models.CharField(max_length=200)
     keyword = models.CharField(max_length=200)
     image = models.ImageField(blank=True, upload_to='images/')
@@ -40,3 +40,11 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+
+class Images(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50)
+    image = models.ImageField(blank=True , upload_to='images/')
+
+    def __str__(self):
+        return self.title
