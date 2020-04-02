@@ -11,25 +11,23 @@ class NewsImageInline(admin.TabularInline):
 class CategoryAdmin(admin.ModelAdmin):
    # fields = ['title', 'status']   liste kısıtlama göstermek istenmeyenler için
 
-    list_display = ['title', 'status']
+    list_display = ['title', 'status', 'image_tag']
+    readonly_fields = ('image_tag',)
     list_filter = ['status']
 
 
 class NewsAdmin(admin.ModelAdmin):
-   # fields = ['title', 'status']   liste kısıtlama göstermek istenmeyenler için
-
-    list_display = ['title', 'category', 'status']
+    list_display = ['title', 'category', 'status', 'image_tag']
+    readonly_fields = ('image_tag',)
     list_filter = ['status', 'category']
     inlines = [NewsImageInline]
 
 
+
 class ImagesAdmin(admin.ModelAdmin):
-   # fields = ['title', 'status']   liste kısıtlama göstermek istenmeyenler için
-
-    list_display = ['title', 'news', 'image']
+    list_display = ['title', 'news', 'image_tag']
+    readonly_fields = ('image_tag',)
     list_filter = ['news']
-
-
 
 
 admin.site.register(Category, CategoryAdmin)
