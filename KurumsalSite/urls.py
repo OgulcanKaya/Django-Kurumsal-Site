@@ -18,9 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from Home import views
+
 urlpatterns = [
     path('', include('Home.urls')),
     path('home/', include('Home.urls')),
+    path('hakkimizda', views.hakkimizda, name='hakkimizda'),
+    path('referanslar', views.referanslar, name='referanslar'),
+    path('iletisim', views.iletisim, name='iletisim'),
     path('news/', include('news.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
