@@ -14,15 +14,57 @@
 {% block body%}
 
 
+    <section id="contact-info">
+        <div class="center">
+            <h2> {{setting.company}} İletişim Sayfasına Hoşgeldiniz! </h2>
+            <p class="lead">{{setting.company}} <br>
+                {{setting.title}}</p>
+        </div>
+        <div class="gmap-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="container">
+                            <div class="col-md-4">
+                                <h2>Bizimle Buradan İletişime Geçebilirsiniz.</h2>
+                                <p class="lead">Mesajınız En Kısa Sürede Cevaplanacaktır!</p>
 
-    <section id="error" class="container text-center">
-        {{ setting.contactus |safe }}
-    </section><!--/#error-->
 
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
 
+                                    {% endif %}
 
+                                <form class="contact-form" method="post" action="">
+                                    <div class="col-sm-5 col-sm-offset-1">
+                                        <div class="form-group">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <input type="submit" value="SEND FORM">
+                                        </div>
 
+                                    </div>
+                                </form>
 
+                            </div>
+                        </div><!--/.container-->
+                    </div>
+
+                    <div class="col-sm-7 map-content">
+                        {{ setting.contactus| safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  <!--/gmap_area -->
+
+    <section class="google" id="contact-page">
+        {{ setting.map| safe }}
+    </section><!--/#contact-page-->
 
     <section id="bottom">
         <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
@@ -89,7 +131,4 @@
             </div>
         </div>
     </section><!--/#bottom-->
-
-
-
 {% endblock %}
