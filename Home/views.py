@@ -1,15 +1,21 @@
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
+
 from Home.models import Setting, ContactFormMassage, ContactFormu
+from news.models import News
 
 
 def index(request):
 
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page':'Home'}
+    sliderdata = News.objects.all()[:4]
+    context = {'setting': setting,
+               'page': 'Home',
+               'sliderdata': sliderdata}
     return render(request, 'index.html', context)
 
 
