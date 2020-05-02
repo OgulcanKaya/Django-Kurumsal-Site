@@ -6,14 +6,16 @@ from django.contrib import messages
 # Create your views here.
 
 from Home.models import Setting, ContactFormMassage, ContactFormu
-from news.models import News
+from news.models import News, Category
 
 
 def index(request):
 
     setting = Setting.objects.get(pk=1)
     sliderdata = News.objects.all()[:4]
+    category = Category.objects.all()
     context = {'setting': setting,
+               'category': category,
                'page': 'Home',
                'sliderdata': sliderdata}
     return render(request, 'index.html', context)
