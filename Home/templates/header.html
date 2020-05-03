@@ -42,25 +42,21 @@
             <div class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Anasayfa</a></li>
+                    {% load mptt_tags %}
+
+                    {% recursetree category %}
+                        <li class="dropdown">
+                            <a href="/category/{{ node.id }}/{{ node.slug }}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown"  {% endif %}>{{ node.title }}  {% if not node.is_leaf_node %}<i class="fa fa-angle-down"></i>{% endif %}</a>
+                            {% if not node.is_leaf_node %}
+                                <ul class="children">
+                                    <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ children }}</a></li>
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
                     <li><a href="/hakkimizda">Hakkımızda</a></li>
                     <li><a href="/referanslar">Referanslarımız</a></li>
                     <li><a href="/iletisim">İletişim</a></li>
-
-
-
-                            {% load mptt_tags %}
-
-                            {% recursetree category %}
-                                <li class="dropdown">
-                                    <a href="/category/{{ node.slug }}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown"  {% endif %}>{{ node.title }}  {% if not node.is_leaf_node %}<i class="fa fa-angle-down"></i>{% endif %}</a>
-                                        {% if not node.is_leaf_node %}
-                                        <ul class="children">
-                                            <li><a href="/category/{{ node.slug }}">{{ children }}</a></li>
-                                        </ul>
-                                    {% endif %}
-                                </li>
-                            {% endrecursetree %}
-
                     <li><a href="blog.html">Blog</a></li>
 
                 </ul>
