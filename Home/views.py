@@ -6,7 +6,7 @@ from django.contrib import messages
 # Create your views here.
 
 from Home.models import Setting, ContactFormMassage, ContactFormu
-from news.models import News, Category, Images
+from news.models import News, Category, Images, Comment
 
 
 def index(request):
@@ -84,9 +84,11 @@ def news_detail(request,id,slug):
     category = Category.objects.all()
     news = News.objects.get(pk=id)
     images = Images.objects.filter(news_id=id)
+    comment = Comment.objects.filter(news_id=id, status='True')
     context = {
             'news': news,
             'images': images,
             'category': category,
+            'comment': comment,
              }
     return render(request, 'newsdetail.html', context)
