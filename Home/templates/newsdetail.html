@@ -1,0 +1,195 @@
+
+
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} {{ news.title}} {% endblock %}
+{% block keywords %} {{ news.keywords }}{% endblock %}
+{% block description %} {{ news.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+
+{% endblock %}
+
+{% block body%}
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2> {{ news.title}}</h2>
+            <p class="lead"> {{ news.description}}</p>
+        </div>
+
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-8">
+
+
+                    <div class="blog-item">
+                        <img class="img-responsive img-blog" src="{{ news.image.url }}" width="100%" alt="" />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2 text-center">
+                                <div class="entry-meta">
+                                    <span id="publish_date">{{ news.created_at}}</span>
+                                    <span><i class="fa fa-user"></i> <a href="#"> John Doe</a></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                                <h2>{{news.title |safe}}</h2>
+                                <p>{{ news.detail|safe }}</p>
+                             </div>
+                        </div>
+                    </div><!--/.blog-item-->
+
+
+
+                    <h1 id="comments_title">Comments</h1>
+
+                    <div class="media comment_section">
+                        <div class="pull-left post_comments">
+                            <a href="#"><img src="images/blog/boy3.png" class="img-circle" alt="" /></a>
+                        </div>
+                        <div class="media-body post_reply_comments">
+                            <h3>Marsh</h3>
+                            <h4>NOVEMBER 9, 2013 AT 9:15 PM</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                            <a href="#">Reply</a>
+                        </div>
+                    </div>
+
+
+                    <div id="contact-page clearfix">
+                        <div class="status alert alert-success" style="display: none"></div>
+                        <div class="message_heading">
+                            <h4>Leave a Replay</h4>
+                            <p>Make sure you enter the(*)required information where indicate.HTML code is not allowed</p>
+                        </div>
+
+                        <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="sendemail.php" role="form">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>Name *</label>
+                                        <input type="text" class="form-control" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email *</label>
+                                        <input type="email" class="form-control" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>URL</label>
+                                        <input type="url" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label>Message *</label>
+                                        <textarea name="message" id="message" required="required" class="form-control" rows="8"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg" required="required">Submit Message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--/#contact-page-->
+                </div><!--/.col-md-8-->
+
+                <aside class="col-md-4">
+                    <div class="widget search">
+                        <form role="form">
+                            <input type="text" class="form-control search_box" autocomplete="off" placeholder="Search Here">
+                        </form>
+                    </div><!--/.search-->
+
+
+
+                    <div class="widget blog_gallery">
+                        <h3>Images Gallery</h3>
+
+                        <ul class="sidebar-gallery">
+                            <li><a class="preview" href="{{ news.image.url }}" rel="prettyPhoto"><img src="{{ news.image.url }}" style="height: 110px; width: 110px;"></a></li>
+                            {% for rs in images %}
+                            <li><a class="preview" href="{{ rs.image.url }}" rel="prettyPhoto"> <img src="{{ rs.image.url }}" style="height: 110px; width: 110px;"> </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div><!--/.blog_gallery-->
+
+
+                </aside>
+
+            </div><!--/.row-->
+
+        </div><!--/.blog-->
+
+    </section><!--/#blog-->
+
+
+    <section id="bottom">
+        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">We are hiring</a></li>
+                            <li><a href="#">Meet the team</a></li>
+                            <li><a href="#">Copyright</a></li>
+                            <li><a href="#">Terms of use</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Contact us</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#">Faq</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Forum</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Refund policy</a></li>
+                            <li><a href="#">Ticket system</a></li>
+                            <li><a href="#">Billing system</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3>Developers</h3>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">SEO Marketing</a></li>
+                            <li><a href="#">Theme</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Email Marketing</a></li>
+                            <li><a href="#">Plugin Development</a></li>
+                            <li><a href="#">Article Writing</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3>Our Partners</h3>
+                        <ul>
+                            <li><a href="#">Adipisicing Elit</a></li>
+                            <li><a href="#">Eiusmod</a></li>
+                            <li><a href="#">Tempor</a></li>
+                            <li><a href="#">Veniam</a></li>
+                            <li><a href="#">Exercitation</a></li>
+                            <li><a href="#">Ullamco</a></li>
+                            <li><a href="#">Laboris</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+            </div>
+        </div>
+    </section><!--/#bottom-->
+
+
+
+{% endblock %}

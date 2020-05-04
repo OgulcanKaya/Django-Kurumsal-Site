@@ -6,17 +6,17 @@
         <div id="myCarousel" class="carousel-inner">
             {{ count }}
 
-                {{ count.counter }}
-                    {% for rs in sliderdata %}
 
-                <div id="yeni" class="item {% if count == 0 %} active {% endif %}" style="background-color: #1f1f20">
+            {% for rs in sliderdata %}
+
+                <div id="yeni" class="item {% if count == 0 %} active {% endif %}" style="background-color: #192841">
                     <div class="container">
                         <div class="row slide-margin">
                             <div class="col-sm-6">
                                 <div class="carousel-content">
                                     <h1 >{{ rs.title }}</h1>
                                     <h2>{{ rs.description }}</h2>
-                                    <a class="btn-slide animation animated-item-3" href="#">Read More</a>
+                                    <a class="btn-slide animation animated-item-3" href="/news/{{ rs.id }}/{{ rs.slug}}">Read More</a>
                                 </div>
                             </div>
 
@@ -31,10 +31,10 @@
                     </div>
                 </div><!--/.item-->
             {% endfor %}
+            {{ count.counter }}
         </div><!--/.carousel-inner-->
-
-
     </div><!--/.carousel-->
+
     <a class="prev hidden-xs" href="#myCarousel" data-slide="prev">
         <i class="fa fa-chevron-left"></i>
     </a>

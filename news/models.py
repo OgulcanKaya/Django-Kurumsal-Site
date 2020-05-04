@@ -55,6 +55,7 @@ class News(models.Model):
     image = models.ImageField(blank=True, upload_to='images/')
     detail = RichTextUploadingField()
     status = models.CharField(max_length=10, choices=STATUS)
+    slug = models.SlugField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
