@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'Home.apps.HomeConfig',
+    'user.apps.UserConfig',
     'news.apps.NewsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
