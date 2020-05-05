@@ -35,6 +35,7 @@ urlpatterns = [
     path('search_auto/', views.news_search_auto, name='news_search_auto'),
     path('logout/', views.logout_view, name='logout_view'),
     path('login/', views.login_view, name='login_view'),
+    path('register/', views.register_view, name='register_view'),
 
 ]
 if settings.DEBUG: # new

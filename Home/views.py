@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
-from Home.forms import SearchForm
+from Home.forms import SearchForm, SignUpForm
 from Home.models import Setting, ContactFormMassage, ContactFormu
 from news.models import News, Category, Images, Comment
 import json
@@ -150,3 +150,22 @@ def login_view(request):
                'setting': setting,
                }
     return render(request, 'login.html', context)
+
+def register_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+    form = SignUpForm(request.POST)
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    context = {'category': category,
+               'setting': setting,
+               'form': form,
+               }
+    return render(request, 'register.html', context)
