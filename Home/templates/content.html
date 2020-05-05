@@ -5,7 +5,7 @@
         <div class="center wow fadeInDown">
             <br><br>
             <h2 style="color:#192841">Son İçerikler</h2>
-            <p class="lead" style="color:#192841"> Sitemize Eklenen Son Haber ve İçerik ve Duyurulara Buradan Ulaşabilirsiniz.</p>
+            <h3 class="lead" style="color:#192841"> Sitemize Eklenen Son Haber ve İçerik ve Duyurulara Buradan Ulaşabilirsiniz.</h3>
         </div>
 
         <div class="row" >
@@ -18,6 +18,7 @@
                                 <h3><a href="/news/{{ rs.id }}/{{ rs.slug}}">{{ rs.title }}</a> </h3>
                                 <p>{{ rs.description }}</p>
                                 <a class="preview" href="{{ rs.image.url }}" rel="prettyPhoto"><i class="fa fa-eye"></i> View</a>
+
                             </div>
                         </div>
                     </div>
@@ -26,8 +27,6 @@
         </div><!--/.row-->
     </div><!--/.container-->
 </section><!--/#recent-works-->
-
-
 <section id="recent-works">
     <div class="container "style=" background-image: url({% static 'images/slider/bg1.jpg'%}); width: 100%; height: 100%;">
         <div class="center wow fadeInDown" >
@@ -54,8 +53,6 @@
         </div><!--/.row-->
     </div><!--/.container-->
 </section><!--/#recent-works-->
-
-
 <section id="content">
     <div class="container">
         <div class="row">

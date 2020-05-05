@@ -78,9 +78,9 @@
                 </button>
 
             </div>
-            <a class="navbar-brand" href="/"><img src="{% static 'images/logo1.png'%}" style="height: 140px;width: 155px;" class="center" alt="logo"></a>
-            <div class="collapse navbar-collapse navbar-right">
 
+            <div class="collapse navbar-collapse navbar-right">
+                <a class="navbar-brand" href="/"><img src="{% static 'images/logo1.png'%}" style="height: 60pt;width: 100px;"  alt="logo"></a>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Anasayfa</a></li>
                     {% load mptt_tags %}
@@ -97,6 +97,25 @@
                     <li><a href="/hakkimizda">Hakkımızda</a></li>
                     <li><a href="/referanslar">Referanslarımız</a></li>
                     <li><a href="/iletisim">İletişim</a></li>
+
+
+                    {% if user.id is not None %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/myprofile/">{{user.first_name}} {{user.last_name}}</a></li>
+                                <li><a href="/logout/">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in<i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/login/">Login</a></li>
+                                <li><a href="/register/">Sign up</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
 
 
                 </ul>
