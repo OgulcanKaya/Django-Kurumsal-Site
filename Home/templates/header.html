@@ -1,4 +1,25 @@
+
 {% load static %}
+
+<script>
+
+    $(function() {
+        $("#query").autocomplete({
+            source: "/search_auto",
+            select: function (event, ui) { //item selected
+                AutoCompleteSelectHandler(event, ui)
+            },
+            minLength: 2,
+        });
+    });
+
+    function AutoCompleteSelectHandler(event, ui)
+    {
+        var selectedObj = ui.item;
+    }
+
+</script>
+
 <header id="header">
     <div class="top-bar">
         <div class="container">
@@ -15,10 +36,28 @@
                             <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                             <li><a href="#"><i class="fa fa-skype"></i></a></li>
                         </ul>
+
                         <div class="search">
                             <form role="form" action="/search/" method="post">
+                                {% load mptt_tags %}
+
+                                <select style="background-color: #2e2e2e" name="catid" class="input search">
+                                    <option value="0"> All Categories</option>
+
+                                    {% recursetree category %}
+                                        {% if node.is_leaf_node %}
+                                            <option value="{{ node.id }}">{{ node.title }}</option>
+                                        {% endif %}
+                                        {% if not node.is_leaf_node %}
+                                            <optgroup label="{{ node.title }}">
+                                                {{ children }}
+                                            </optgroup>
+                                        {% endif %}
+                                        </li>
+                                    {% endrecursetree %}
+                                </select>
                                 {% csrf_token %}
-                                <input name="query" type="text" class="search-form" autocomplete="off" placeholder="Enter your Keywords">
+                                <input id="query" name="query" type="text" class="search-form" autocomplete="off" placeholder="Enter your Keywords">
                                 <button class="search-btn"><i class="fa fa-search"></i></button>
                             </form>
                         </div>

@@ -7,7 +7,7 @@ from django.contrib import messages
 from Home.forms import SearchForm
 from Home.models import Setting, ContactFormMassage, ContactFormu
 from news.models import News, Category, Images, Comment
-
+import json
 
 def index(request):
 
@@ -99,7 +99,11 @@ def news_search(request):
         if form.is_valid():
             query = form.cleaned_data['query']
             category = Category.objects.all()
-            news = News.objects.filter(title__icontains=query)
+            catid = form.cleaned_data['catid']
+            if catid == 0:
+                news = News.objects.filter(title__icontains=query)
+            else:
+                news = News.objects.filter(title__icontains=query, category_id=catid)
             context = {
                 'news': news,
                 'category': category,
@@ -107,3 +111,18 @@ def news_search(request):
             return render(request, 'news_search.html', context)
 
     return HttpResponseRedirect('/')
+
+def news_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        news = News.objects.filter(title__icontains=q)
+        results = []
+        for rs in news:
+            news_json = {}
+            news_json = rs.title
+            results.append(news_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
