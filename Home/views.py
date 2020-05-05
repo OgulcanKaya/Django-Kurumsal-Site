@@ -13,7 +13,7 @@ def index(request):
 
     setting = Setting.objects.get(pk=1)
     setting2 = Setting.objects.get(pk=1)
-    sliderdata = News.objects.all()[:4]
+    sliderdata = News.objects.all().order_by('?')[:8]
     category = Category.objects.all()
     daynews=News.objects.all().order_by('-id')[:8]
     randomnews = News.objects.all().order_by('?')[:8]
