@@ -77,8 +77,8 @@
                             <p>Make sure you enter the(*)required information where indicate.</p>
                             {% if messages %}
                                 {% for message in messages %}
-                                    <div class="alert alert-warning{{ message.tags }}" role="alert">
-                                        {{ message }}
+                                    <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888">
+                                        <p style="color:#a6e1ec ">{{ message }}</p>
                                     </div>
                                 {% endfor %}
                             {% endif %}

@@ -16,9 +16,10 @@
                             <li><a href="#"><i class="fa fa-skype"></i></a></li>
                         </ul>
                         <div class="search">
-                            <form role="form">
-                                <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-                                <i class="fa fa-search"></i>
+                            <form role="form" action="/search/" method="post">
+                                {% csrf_token %}
+                                <input name="query" type="text" class="search-form" autocomplete="off" placeholder="Enter your Keywords">
+                                <button class="search-btn"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>

@@ -31,5 +31,6 @@ def addcomment(request,id):
 
             return HttpResponseRedirect(url)
 
-    messages.warning(request, "Yorumunuz Gönderilememiştir, Lütfen Kontrol Ediniz!")
-    return HttpResponse("Kaydedilme işlemi gerçekleşmedi")
+    messages.warning(request, "Yorumunuz Gönderilememiştir, Lütfen Bilgilerinizi Kontrol Ediniz!")
+    return HttpResponseRedirect(url)
+

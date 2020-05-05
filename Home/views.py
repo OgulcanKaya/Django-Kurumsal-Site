@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
-
+from Home.forms import SearchForm
 from Home.models import Setting, ContactFormMassage, ContactFormu
 from news.models import News, Category, Images, Comment
 
@@ -92,3 +92,18 @@ def news_detail(request,id,slug):
             'comment': comment,
              }
     return render(request, 'newsdetail.html', context)
+
+def news_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            category = Category.objects.all()
+            news = News.objects.filter(title__icontains=query)
+            context = {
+                'news': news,
+                'category': category,
+            }
+            return render(request, 'news_search.html', context)
+
+    return HttpResponseRedirect('/')
