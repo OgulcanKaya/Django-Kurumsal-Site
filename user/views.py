@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -16,3 +17,11 @@ def index(request):
                }
     return render(request, 'userprofile.html', context)
 
+def other_users(request,id):
+    category = Category.objects.all()
+    profile = User.objects.get(pk=id)
+    context = {
+               'category': category,
+               'profile': profile,
+               }
+    return render(request, 'otheruserprofile.html', context)

@@ -54,6 +54,7 @@ class News(models.Model):
         ('False', 'Hayır'),
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE) #relations with Category
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=200)
     keyword = models.CharField(max_length=200)

@@ -17,13 +17,15 @@ def index(request):
     category = Category.objects.all()
     daynews=News.objects.all().order_by('-id')[:8]
     randomnews = News.objects.all().order_by('?')[:8]
+    comment = Comment.objects.all().order_by('-id')[:4]
     context = {'setting': setting,
                'category': category,
                'page': 'Home',
                'daynews': daynews,
                'randomnews': randomnews,
                'setting2': setting2,
-               'sliderdata': sliderdata}
+               'sliderdata': sliderdata,
+                'comment': comment}
     return render(request, 'index.html', context)
 
 
