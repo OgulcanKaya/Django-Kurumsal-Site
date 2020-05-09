@@ -34,14 +34,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-10 blog-content"style="height:800pt; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
-                                    <a href="#"><img class="img-responsive img-blog" src="{{ rs.image.url }}" width="100%" alt="" /></a>
+                                <div class="col-xs-12 col-sm-10 blog-content"style="height:500pt; overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
+                                    <a href="/news/{{ rs.id }}/{{ rs.slug }}"><img class="img-responsive img-blog" src="{{ rs.image.url }}" width="100%" alt="" /></a>
                                     <h2><a href="/news/{{ rs.id }}/{{ rs.slug }}">{{ rs.title |safe }}</a></h2>
                                     <h3>{{ rs.detail |safe }}</h3>
                                 </div>
                                 <div class="col-xs-12 col-sm-10 blog-content">
-                                <a class="btn btn-primary readmore" href="/news/{{ rs.id }}/{{ rs.slug }}">Read More <i class="fa fa-angle-right"></i></a>
-                                     </div>
+                                    <a class="btn btn-primary readmore" href="/news/{{ rs.id }}/{{ rs.slug }}">Read More <i class="fa fa-angle-right"></i></a>
+                                </div>
                             </div>
                         </div><!--/.blog-item-->
                     {% endfor %}
@@ -69,30 +69,25 @@
                     <div class="widget categories">
                         <h3>Recent Comments</h3>
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="single_comments">
-                                    <img src="images/blog/avatar3.png" alt=""  />
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
-                                    <div class="entry-meta small muted">
-                                        <span>By <a href="#">Alex</a></span> <span>On <a href="#">Creative</a></span>
-                                    </div>
-                                </div>
-                                <div class="single_comments">
-                                    <img src="images/blog/avatar3.png" alt=""  />
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
-                                    <div class="entry-meta small muted">
-                                        <span>By <a href="#">Alex</a></span> <span>On <a href="#">Creative</a></span>
-                                    </div>
-                                </div>
-                                <div class="single_comments">
-                                    <img src="images/blog/avatar3.png" alt=""  />
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </p>
-                                    <div class="entry-meta small muted">
-                                        <span>By <a href="#">Alex</a></span> <span>On <a href="#">Creative</a></span>
-                                    </div>
-                                </div>
+                            {% for rs in comment %}
+                                <div class="col-sm-12">
+                                    <div class="single_comments">
+                                        <a href="/user/otherusers/{{ rs.user_id }}">
+                                            <img class="img-responsive img-circle" src="{{rs.user.userprofile.image.url}}" style="height: 80px; width: 60px">
+                                        </a>
+                                        <a href="/news/{{ rs.news.id }}/{{ rs.news.slug }}">
+                                        <p>
+                                            {{ rs.news.title }}
+                                        </p>
+                                             </a>
 
-                            </div>
+                                        <p>{{rs.comment}}</p>
+                                        <div class="entry-meta small muted">
+                                            <span>By <a href="/user/otherusers/{{ rs.user_id }}">-{{rs.user.username}}/</a></span> <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div><!--/.recent comments-->
 
@@ -101,7 +96,7 @@
                     <div class="widget blog_gallery">
                         <h3>Our Gallery</h3>
                         <ul class="sidebar-gallery">{% for rs in news2 %}
-                            <li><a href="#"><img src="{{ rs.image.url }}" style="width: 120px" height=" 80 px" /></a></li>
+                            <li><a href="/news/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}" style="width: 120px" height=" 80 px" /></a></li>
                         {% endfor %}
                         </ul>
                     </div><!--/.blog_gallery-->

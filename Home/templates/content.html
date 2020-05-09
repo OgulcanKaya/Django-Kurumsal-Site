@@ -1,6 +1,6 @@
 {% load static %}
 
-<section id="recent-works" >
+<section id="recent-works" style=" padding-top: 4px; padding-bottom: 5px;" >
     <div class="container" style=" background-image: url({% static 'images/partners/partner_bg.png'%}); width: 100%; height:100%;">
         <div class="center wow fadeInDown">
             <br><br>
@@ -26,12 +26,14 @@
             {% endfor %}
         </div><!--/.row-->
     </div><!--/.container-->
+</section><!--/#recent-works-->
 
-    <div class="container" style=" background-image: url({% static 'images/slider/bg1.jpg'%}); width: 100%; height: 100%;">
+<section id="services" style=" padding-top: 4px; padding-bottom: 10px;" >
+    <div class="container">
         <div class="center wow fadeInDown" >
             <br><br>
-            <h2 style="color:#192841">Duyurular, Haberler ve Etkinlikler</h2>
-            <p class="lead" style="color:#192841"> Sitemize Eklenen Haber ve İçeriklere Buradan Ulaşabilirsiniz.</p>
+            <h2 style="color:#888888">Duyurular, Haberler ve Etkinlikler</h2>
+            <p class="lead" style="color:#888888"> Sitemize Eklenen Haber ve İçeriklere Buradan Ulaşabilirsiniz.</p>
         </div>
 
         <div class="row">
@@ -60,25 +62,35 @@
 
                 {% for rs in comment %}
                     <div class="col-xs-12 col-sm-4 wow fadeInDown">
+
                         <div class="testimonial">
 
 
                             <div class="media testimonial-inner">
                                 <div class="pull-left">
                                     <a href="/user/otherusers/{{ rs.user_id }}">
-                                        <img class="img-responsive img-circle" src="{{rs.user.userprofile.image.url}}" style="height: 80px">
+                                        <img class="img-responsive img-circle" src="{{rs.user.userprofile.image.url}}" style="height: 80px; width: 60px">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                     <a href="/news/{{ rs.news.id }}/{{ rs.news.slug }}">
-                                    <h2 style="color: #1a2941">{{rs.comment}}</h2>
-                                     </a>
+                                    <a style="color:#FAFAFA" href="/news/{{ rs.news.id }}/{{ rs.news.slug }}">
+                                        <h2>
+                                            {{rs.news.title}}
+                                        </h2>
+                                    </a>
+                                    <h4 style="color: #1a2941">{{rs.comment}}</h4>
                                     <span style="color: #5bc0de"><strong><a href="/user/otherusers/{{ rs.user_id }}">-{{rs.user.username}}/</a></strong> {{rs.user.email}}</span>
+
                                 </div>
+
                             </div>
 
                         </div>
+
                     </div>
+                    <br><br><br>
+
+
                 {% endfor %}
             </div>
         </div><!--/.row-->

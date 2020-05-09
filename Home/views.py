@@ -17,7 +17,7 @@ def index(request):
     category = Category.objects.all()
     daynews=News.objects.all().order_by('-id')[:8]
     randomnews = News.objects.all().order_by('?')[:8]
-    comment = Comment.objects.all().order_by('-id')[:4]
+    comment = Comment.objects.all().order_by('-id')[:6]
     context = {'setting': setting,
                'category': category,
                'page': 'Home',
@@ -69,21 +69,26 @@ def iletisim(request):
                'form': form}
     return render(request, 'iletisim.html', context)
 
-def category_news(request,id,slug):
+def category_news(request,id,slug):     #********************** içeriklerin Gösterilmesi ***********************
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
     news = News.objects.filter(category_id = id)
     news2 = News.objects.all()
+    setting = Setting.objects.get(pk=1)
+    comment = Comment.objects.filter(news__category_id=id, status='True')
     context = {
         'news': news,
         'news2': news2,
         'category': category,
         'categorydata': categorydata,
+        'setting': setting,
+        'comment': comment,
     }
     return render(request, 'contents.html', context)
 
 def news_detail(request,id,slug):
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
     news = News.objects.get(pk=id)
     images = Images.objects.filter(news_id=id)
     comment = Comment.objects.filter(news_id=id, status='True')
@@ -92,6 +97,7 @@ def news_detail(request,id,slug):
         'images': images,
         'category': category,
         'comment': comment,
+        'setting': setting,
     }
     return render(request, 'newsdetail.html', context)
 

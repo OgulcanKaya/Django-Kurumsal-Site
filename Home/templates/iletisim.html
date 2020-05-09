@@ -17,8 +17,7 @@
     <section id="contact-info">
         <div class="center">
             <h2> {{setting.company}} İletişim Sayfasına Hoşgeldiniz! </h2>
-            <p class="lead">{{setting.company}} <br>
-                {{setting.title}}</p>
+            <p class="lead">{{setting.title}}</p>
         </div>
         <div class="gmap-area">
             <div class="container">
@@ -30,21 +29,21 @@
                                 <p class="lead">Mesajınız En Kısa Sürede Cevaplanacaktır!</p>
 
 
-                                    {% if messages %}
-                                        {% for message in messages %}
-                                            <div class="alert alert-{{ message.tags }}" role="alert">
-                                                {{ message }}
-                                            </div>
-                                        {% endfor %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }}" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
 
-                                    {% endif %}
+                                {% endif %}
 
                                 <form class="contact-form" method="post" action="">
                                     <div class="col-sm-5 col-sm-offset-1">
                                         <div class="form-group">
                                             {% csrf_token %}
                                             {{ form.as_p }}
-                                            <input class="btn btn-primary btn-lg"type="submit" value="SEND FORM">
+                                            <input class="btn btn-primary btn-lg"type="submit" value="SEND MESSAGE">
                                         </div>
 
                                     </div>

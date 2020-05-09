@@ -2,7 +2,7 @@
 
 {% extends 'homebase.html' %}
 {% load static %}
-{% block title %} {{ profile.user_name}} Profile {% endblock %}
+{% block title %} {{ profile.first_name}} Profile {% endblock %}
 {% block keywords %} {{ news.keywords }}{% endblock %}
 {% block description %} {{ news.description }}{% endblock %}
 
@@ -25,14 +25,14 @@
                 <div class="col-md-8" style="background-color: #faf0e6">
                     <h1 id="comments_title" class="center">Your Profile</h1>
                     <!-- İçerik Başlangıç -->
-                    <div class="blog-item">
+                     <div class="blog-item">
 
                         <table class="table">
                             <thead>
 
                             <tr>
                                 <th class="text-left"style="color: #1f1f20"> </th>
-                                <div class="center"><img src="{{ profile.image.url }}" height="250px"></div>
+                                <div class="center"><img src="{{ profile.userprofile.image.url }}" height="250px"></div>
                             </tr>
 
                             <tr>
@@ -42,27 +42,27 @@
 
                             <tr>
                                 <th class="text-left"style="color: #1f1f20"> E-mail : </th>
-                                <td class="text-center"> {{ profile.user.email }}</td>
+                                <td class="text-center"> {{ profile.email }}</td>
                             </tr>
 
                             <tr>
                                 <th class="text-left"style="color: #1f1f20"> Phone : </th>
-                                <td class="text-center"> {{ profile.phone }}</td>
+                                <td class="text-center"> {{ profile.userprofile.phone}}</td>
                             </tr>
 
                             <tr>
                                 <th class="text-left"style="color: #1f1f20"> Address : </th>
-                                <td class="text-center"> {{ profile.adress }}</td>
+                                <td class="text-center"> {{ profile.userprofile.adress }}</td>
                             </tr>
 
                             <tr>
                                 <th class="text-left"style="color: #1f1f20"> City : </th>
-                                <td class="text-center"> {{ profile.city }}</td>
+                                <td class="text-center"> {{ profile.userprofile.city }}</td>
                             </tr>
 
                             <tr>
                                 <th class="text-left" style="color: #1f1f20"> Country : </th>
-                                <td class="text-center"> {{ profile.country }}</td>
+                                <td class="text-center"> {{ profile.userprofile.country }}</td>
                             </tr>
                             </thead>
                         </table>

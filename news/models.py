@@ -107,6 +107,9 @@ class Comment(models.Model):
     def __str__(self):
         return self.subject
 
+    def category(self):
+        return self.news.category
+
 class CommentForm(ModelForm):
         class Meta:
             model = Comment

@@ -25,16 +25,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-xs-4">
-                    <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
+                    <div class="top-number"><p><i class="fa fa-phone-square"></i>  {{ setting.phone}}</p></div>
                 </div>
                 <div class="col-sm-6 col-xs-8">
                     <div class="social">
                         <ul class="social-share">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            <li><a href="{{ setting.facebook}}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{ setting.twitter}}"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="{{ setting.instagram}}"><i class="fa fa-instagram"></i></a></li>
                         </ul>
 
                         <div class="search">
@@ -101,18 +99,18 @@
 
                     {% if user.id is not None %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<i class="fa fa-angle-down"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hesap<i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/user">{{user.first_name}} {{user.last_name}} </a></li>
-                                <li><a href="/logout/">Logout</a></li>
+                                <li><a href="/user"><img src="{{ user.userprofile.image.url}}" height="60px" class="img-circle"> {{user.first_name}} {{user.last_name}} </a></li>
+                                <li><a href="/logout/"><i class="fa fa-sign-out"> </i>  Logout</a></li>
                             </ul>
                         </li>
                     {% else %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in<i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/login/">Login</a></li>
-                                <li><a href="/register/">Sign up</a></li>
+                                <li><a href="/login/"><i class="fa fa-unlock"> </i>  Login</a></li>
+                                <li><a href="/register/"><i class="fa fa-sign-in"> </i>  Sign up</a></li>
                             </ul>
                         </li>
                     {% endif %}

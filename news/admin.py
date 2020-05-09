@@ -68,7 +68,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     related_news_cumulative_count.short_description = 'Related news (in tree)'
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['subject', 'comment', 'news', 'user', 'status']
+    list_display = ['subject', 'category', 'comment', 'news', 'user', 'status']
     list_filter = ['status']
 
 
