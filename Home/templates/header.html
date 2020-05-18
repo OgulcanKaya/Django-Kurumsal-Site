@@ -84,9 +84,9 @@
                     {% load mptt_tags %}
                     {% recursetree category %}
                         <li class="dropdown">
-                            <a href="/category/{{ node.id }}/{{ node.slug }}" class="dropdown-toggle" {% if not node.is_leaf_node %} data-toggle="dropdown"  {% endif %}>{{ node.title }}  {% if not node.is_leaf_node %}<i class="fa fa-angle-down"></i>{% endif %}</a>
+                            <a href="/category/{{ node.id }}/{{ node.slug }}" {% if not node.is_leaf_node %} class="dropdown" {% endif %}>{{ node.title }}  {% if not node.is_leaf_node %}<i class="fa fa-angle-down"></i>{% endif %}</a>
                             {% if not node.is_leaf_node %}
-                                <ul class="children">
+                                <ul class="dropdown-menu">
                                     <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ children }}</a></li>
                                 </ul>
                             {% endif %}
@@ -99,7 +99,7 @@
 
                     {% if user.id is not None %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hesap<i class="fa fa-angle-down"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hesap  <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/user"><img src="{{ user.userprofile.image.url}}" height="60px" class="img-circle"> {{user.first_name}} {{user.last_name}} </a></li>
                                 <li><a href="/logout/"><i class="fa fa-sign-out"> </i>  Logout</a></li>

@@ -3,8 +3,8 @@
 {% extends 'homebase.html' %}
 {% load static %}
 {% block title %} {{ profile.first_name}} Profile {% endblock %}
-{% block keywords %} {{ news.keywords }}{% endblock %}
-{% block description %} {{ news.description }}{% endblock %}
+{% block keywords %} {% endblock %}
+{% block description %}{% endblock %}
 
 {% block head %}
     <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
@@ -16,65 +16,46 @@
 
     <section id="blog" class="container">
         <div class="center">
-            <h2> Your Profile Page</h2>
-            <p class="lead"> {{ news.description}}</p>
+            <h2> Change Your İnformations</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888">
+                        <p style="color:#a6e1ec ">{{ message| safe }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
 
         <div class="blog">
             <div class="row">
                 <div class="col-md-8" style="background-color: #faf0e6">
-                    <h1 id="comments_title" class="center">Your Profile</h1>
+                    <h1 id="comments_title" class="center">You can change your informations from here.</h1>
                     <!-- İçerik Başlangıç -->
-                    <div class="blog-item">
+                    <div class="blog-content">
+                        <div class="center"><img src="{{ profile.userprofile.image.url }}" height="250px"></div>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                {{ user_form.as_p }}
+                                {{ profile_form.as_p }}
+                            </fieldset>
+                            <div class="form-group">
 
-                        <table class="table">
-                            <thead>
+                                <button class="btn btn btn-primary button" type="submit"> Update Profile</button>
+                            </div>
 
-                            <tr>
-                                <th class="text-left"style="color: #1f1f20"> </th>
-                                <div class="center"><img src="{{ profile.userprofile.image.url }}" height="250px"></div>
-                            </tr>
 
-                            <tr>
-                                <th class="text-left"style="color: #1f1f20"> Name Surname : </th>
-                                <td class="text-center"> {{ profile.first_name}} {{ profile.last_name}}</td>
-                            </tr>
 
-                            <tr>
-                                <th class="text-left"style="color: #1f1f20"> E-mail : </th>
-                                <td class="text-center"> {{ profile.email }}</td>
-                            </tr>
+                        </form>
 
-                            <tr>
-                                <th class="text-left"style="color: #1f1f20"> Phone : </th>
-                                <td class="text-center"> {{ profile.userprofile.phone}}</td>
-                            </tr>
 
-                            <tr>
-                                <th class="text-left"style="color: #1f1f20"> Address : </th>
-                                <td class="text-center"> {{ profile.userprofile.adress }}</td>
-                            </tr>
 
-                            <tr>
-                                <th class="text-left"style="color: #1f1f20"> City : </th>
-                                <td class="text-center"> {{ profile.userprofile.city }}</td>
-                            </tr>
-
-                            <tr>
-                                <th class="text-left" style="color: #1f1f20"> Country : </th>
-                                <td class="text-center"> {{ profile.userprofile.country }}</td>
-                            </tr>
-                            </thead>
-                        </table>
-                        <th class="text-right">
-                            <a href="/user/update" class="btn btn btn-primary button"> Update Profile</a>
-                            <a href="/user/password" class="btn btn btn-primary button"> Change Password</a>
-
-                        </th>
 
                     </div>
                     <!-- İçerik Bitiş -->
                 </div><!--/.row-->
+
+
                 <aside class="col-md-4">
                     <div class="widget search">
                         <form role="form">

@@ -95,7 +95,7 @@ class Comment(models.Model):
         ('False', 'Hayır'),
     )
     news = models.ForeignKey(News, on_delete=models.CASCADE) #relations with News
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # relations with News
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # relations with User
     subject = models.CharField(max_length=200)
     comment = models.CharField(max_length=200)
     rate = models.IntegerField(blank=True)
