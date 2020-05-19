@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -7,10 +8,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from Home.models import UserProfile, Setting
-from news.models import Category
+from news.models import Category, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
-
+@login_required(login_url='/login')
 def index(request):
     category = Category.objects.all()
     current_user = request.user
@@ -34,6 +35,7 @@ def other_users(request,id):
     }
     return render(request, 'otheruserprofile.html', context)
 
+@login_required(login_url='/login')
 def user_update(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -59,7 +61,7 @@ def user_update(request):
         }
         return render(request, 'user_update.html', context)
 
-
+@login_required(login_url='/login')
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -81,3 +83,25 @@ def change_password(request):
         'setting': setting,
         }
         return render(request, 'change_password.html', context)
+
+@login_required(login_url='/login')
+def comments(request):
+    category = Category.objects.all()
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user.id)
+    profile = User.objects.get(pk=current_user.id)
+    setting = Setting.objects.get(pk=1)
+    context = {
+        'category': category,
+        'comments': comments,
+        'setting': setting,
+        'profile': profile,
+    }
+    return render(request, 'user_comments.html', context)
+
+@login_required(login_url='/login')
+def delete_comment(request, id):
+    current_user = request.user
+    Comment.objects.filter(id=id, user_id=current_user.id).delete()
+    messages.success(request, 'Your comments has been deleted successfuly.')
+    return HttpResponseRedirect('/user/comments')

@@ -69,7 +69,7 @@ def iletisim(request):
                'form': form}
     return render(request, 'iletisim.html', context)
 
-def category_news(request,id,slug):     #********************** içeriklerin Gösterilmesi ***********************
+def category_news(request,id,slug):     #********************** Her içeriğin listelenerek Gösterilmesi ***********************
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
     news = News.objects.filter(category_id = id)

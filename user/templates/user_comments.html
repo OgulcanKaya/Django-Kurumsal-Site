@@ -1,0 +1,96 @@
+
+
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} {{ profile.first_name}} Comments {% endblock %}
+{% block keywords %} {% endblock %}
+{% block description %}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+
+
+{% endblock %}
+
+{% block body%}
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2> Change Your İnformations</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888">
+                        <p style="color:#a6e1ec ">{{ message| safe }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-8" style="background-color: #faf0e6">
+                    <h1 id="comments_title" class="center">{{ profile.first_name}} Comments</h1>
+                    <!-- İçerik Başlangıç -->
+                    <div class="blog-content">
+                        <table style="width: content-box">
+                            <tr>
+
+                                <th>Image</th>
+                                <th>Content</th>
+                                <th>Rate</th>
+                                <th>Subject</th>
+                                <th>Comment</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            {% for rs in comments %}
+                                <tr>
+
+                                    <th class="text-left">
+                                        <a href="/news/{{ rs.news.id }}/{{ rs.news.id }}"> <img src="{{ rs.news.image.url }}"style="height: 50px; width: 75px"></a>
+                                    </th>
+                                    <th class="text-left">
+                                        <a href="/news/{{ rs.news.id }}/{{ rs.news.slug }}"> {{ rs.news.title}} </a>
+                                    </th>
+                                    <th class="text-left" style="color: black"> {{ rs.rate }} </a> </th>
+                                    <th class="text-left" style="color: black">{{ rs.subject }} </a> </th>
+                                    <th class="text-left" style="color: black">{{ rs.comment }} </a> </th>
+                                    <th class="text-left" style="color: black">{{ rs.status }} </a> </th>
+                                    <th class="text-left" style="color: black">{{ rs.created_at }} </a> </th>
+                                    <th class="text-left">
+                                        <a class="btn btn btn-primary button" href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Will be Delete! Are you sure?')"> Delete</a>
+                                    </th>
+
+
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <!-- İçerik Bitiş -->
+                </div><!--/.row-->
+
+
+                <aside class="col-md-4">
+                    <div class="widget search">
+                        <form role="form">
+                            <input type="text" class="form-control search_box" autocomplete="off" placeholder="Search Here">
+                        </form>
+                    </div><!--/.search-->
+
+
+                    {% include 'userpanel.html' %}
+
+
+                </aside>
+
+
+            </div><!--/.row-->
+
+        </div><!--/.blog-->
+
+    </section><!--/#blog-->
+
+
+{% endblock %}
