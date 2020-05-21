@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from Home.models import Setting, ContactFormMassage, UserProfile
+from Home.models import Setting, ContactFormMassage, UserProfile, FAQ
 
 
 class ContactFormMessageAdmin(admin.ModelAdmin):
@@ -13,6 +13,11 @@ class UserProfileFormAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     list_filter = ['city', 'country']
 
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ['ordernumber', 'question', 'answer', 'status',]
+    list_filter = ['status']
+
 admin.site.register(ContactFormMassage, ContactFormMessageAdmin)
 admin.site.register(Setting)
 admin.site.register(UserProfile, UserProfileFormAdmin)
+admin.site.register(FAQ, FAQAdmin)

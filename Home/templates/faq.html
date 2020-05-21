@@ -1,0 +1,38 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Sıkça Sorulan Sorular- {{ setting.company}}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+    <script>
+        $( function() {
+            $( "#accordion" ).accordion({
+                collapsible: true
+            });
+        } );
+    </script>
+
+{% endblock %}
+
+{% block body%}
+
+    <section id="error" class="container text-center">
+    <h1>Sıkça Sorulan Sorular</h1>
+
+        <div id="accordion">
+            {% for rs in faq %}
+                <h3>{{ rs.question }}</h3>
+                <div>
+                    <p>
+                        {{ rs.answer }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </section><!--/#error-->
+
+{% endblock %}

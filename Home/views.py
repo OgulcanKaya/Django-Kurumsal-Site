@@ -5,7 +5,7 @@ from django.contrib import messages
 
 # Create your views here.
 from Home.forms import SearchForm, SignUpForm
-from Home.models import Setting, ContactFormMassage, ContactFormu, UserProfile
+from Home.models import Setting, ContactFormMassage, ContactFormu, UserProfile, FAQ
 from news.models import News, Category, Images, Comment
 import json
 
@@ -185,3 +185,14 @@ def register_view(request):  #**********************  Kullanıcı Kayıt olma Sa
                'form': form,
                }
     return render(request, 'register.html', context)
+
+
+def faq(request):
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    faq = FAQ.objects.all().order_by('ordernumber')
+    context = {'category': category,
+               'setting': setting,
+               'faq': faq,
+               }
+    return render(request, 'faq.html', context)
