@@ -14,7 +14,7 @@ urlpatterns = [
     path('mynews/', views.my_news, name='my_news'),
     path('news_edit/<int:id>', views.news_edit, name='news_edit'),
     path('news_delete/<int:id>', views.news_delete, name='news_delete'),
-
+    path('newsaddimage/<int:id>', views.news_add_image, name='news_add_image'),
     # ex: /polls/5/
 
 

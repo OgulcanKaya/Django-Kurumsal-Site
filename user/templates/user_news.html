@@ -33,14 +33,14 @@
                     <!-- İçerik Başlangıç -->
                     <div class="blog-content">
 
-                        <table style="width: 100%">
+                        <table style="width: 100%" cellpadding="10">
                             <tr>
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Slug</th>
                                 <th>Category</th>
+                                <th>Galery</th>
                                 <th>Status</th>
-
                                 <th>Date</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -54,11 +54,16 @@
                                     <th class="text-left">
                                         <a href="/news/{{ rs.id }}/{{ rs.slug }}"> {{ rs.title}} </a>
                                     </th>
-                                    <th class="text-left" style="color: black"> {{ rs.slug }} </a> </th>
-                                    <th class="text-left" style="color: black"> {{ rs.category }} </a> </th>
-                                    <th class="text-left" style="color: black">{{ rs.status }} </a> </th>
+                                    <th class="text-left" style="color: black; padding-left: 8px"> {{ rs.slug }} </a> </th>
+                                    <th class="text-left" style="color: black; padding-left: 8px"> {{ rs.category }} </a> </th>
+                                    <th class="text-left" style="padding-left: 8px">
+                                        <a href="javascript:;" onclick="window.open('/user/newsaddimage/{{ rs.id }}','galery','height=600,width=800,top=250,left=350')">
+                                        <img src="{% static 'images/gallery.ico' %}"style="width: 30pt; height: 30pt">
+                                            </a>
+                                    </th>
+                                    <th class="text-left" style="color: black; padding-left: 8px">{{ rs.status }} </a> </th>
 
-                                    <th class="text-left" style="color: black">{{ rs.created_at }} </a> </th>
+                                    <th class="text-left" style="color: black; padding-left: 8px">{{ rs.created_at }} </a> </th>
                                     <td class="text-left">
                                         <a class="btn btn btn-primary button" href="/user/news_edit/{{ rs.id }}" > Edit</a>
                                     </td>
