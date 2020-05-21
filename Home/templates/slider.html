@@ -1,11 +1,20 @@
 {% load static %}
 
 <section id="main-slider" class="no-margin">
+    <div class="no-margin">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888; text-align: center">
+                    <p style="color:#a6e1ec ">{{ message| safe }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 
     <div class="carousel slide">
-
         <div id="myCarousel" style="background-color: #00010a">
-         {{ count }}
+
+            {{ count }}
             {% for rs in sliderdata %}
 
                 <div class="item {% if count == 0 %} active {% endif %}" style="background-color: #00010a">

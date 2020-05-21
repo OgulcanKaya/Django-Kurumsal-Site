@@ -5,7 +5,7 @@ from django.contrib import messages
 
 # Create your views here.
 from Home.forms import SearchForm, SignUpForm
-from Home.models import Setting, ContactFormMassage, ContactFormu
+from Home.models import Setting, ContactFormMassage, ContactFormu, UserProfile
 from news.models import News, Category, Images, Comment
 import json
 
@@ -86,7 +86,7 @@ def category_news(request,id,slug):     #********************** Her içeriğin l
     }
     return render(request, 'contents.html', context)
 
-def news_detail(request,id,slug):
+def news_detail(request,id,slug): #********************** Her içeriğin Detayının Gösterilmesi ***********************
     category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
     news = News.objects.get(pk=id)
@@ -101,7 +101,7 @@ def news_detail(request,id,slug):
     }
     return render(request, 'newsdetail.html', context)
 
-def news_search(request):
+def news_search(request):   #**********************  içeriğin Detayının Gösterilmesi ***********************
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -140,13 +140,14 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 
-def login_view(request):
+def login_view(request):  #**********************  Kullanıcı Giriş yapma Sayfası ***********************
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "Giriş Yapma Başarılı Sitemize Hoşgeldiniz!")
             return HttpResponseRedirect('/')
         else:
             messages.warning(request, "Giriş Yapılamamıştır. Lütfen Kullanıcı Adı ve Şifrenizi Kontrol Ediniz!")
@@ -159,7 +160,7 @@ def login_view(request):
                }
     return render(request, 'login.html', context)
 
-def register_view(request):
+def register_view(request):  #**********************  Kullanıcı Kayıt olma Sayfası ***********************
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -168,6 +169,13 @@ def register_view(request):
             password = request.POST['password1']
             user = authenticate(request, username=username, password=password)
             login(request, user)
+            #Create data in profile  table for user
+            current_user =request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.image = "images/users/defaultuser.png"
+            data.save()
+            messages.success(request, "Kayıt Olma Başarılı Sitemize Hoşgeldiniz!")
             return HttpResponseRedirect('/')
     form = SignUpForm(request.POST)
     category = Category.objects.all()

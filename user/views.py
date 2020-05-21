@@ -16,7 +16,7 @@ from user.forms import UserUpdateForm, ProfileUpdateForm
 def index(request):
     category = Category.objects.all()
     current_user = request.user
-    profile = User.objects.get(pk=current_user.id)
+    profile = UserProfile.objects.get(user_id=current_user.id)
     setting = Setting.objects.get(pk=1)
     context = {
         'category': category,
