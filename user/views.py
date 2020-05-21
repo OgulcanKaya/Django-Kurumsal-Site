@@ -8,8 +8,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from Home.models import UserProfile, Setting
-from news.models import Category, Comment
+from news.models import Category, Comment, News, NewsForm
 from user.forms import UserUpdateForm, ProfileUpdateForm
+
 
 @login_required(login_url='/login')
 def index(request):
@@ -105,3 +106,85 @@ def delete_comment(request, id):
     Comment.objects.filter(id=id, user_id=current_user.id).delete()
     messages.success(request, 'Your comments has been deleted successfuly.')
     return HttpResponseRedirect('/user/comments')
+
+
+@login_required(login_url='/login')
+
+def my_news(request):
+    category = Category.objects.all()
+    current_user = request.user
+    news = News.objects.filter(user_id=current_user.id)
+    profile = User.objects.get(pk=current_user.id)
+    setting = Setting.objects.get(pk=1)
+    context = {
+        'category': category,
+        'news': news,
+        'setting': setting,
+        'profile': profile,
+    }
+    return render(request, 'user_news.html', context)
+
+
+@login_required(login_url='/login')
+
+def add_news(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            current_user = request.user
+            data = News()
+            data.user_id = current_user.id
+            data.title = form.cleaned_data['title']
+            data.keyword = form.cleaned_data['keyword']
+            data.description = form.cleaned_data['description']
+            data.image = form.cleaned_data['image']
+            data.category = form.cleaned_data['category']
+            data.slug = form.cleaned_data['slug']
+            data.detail = form.cleaned_data['detail']
+            data.status = 'False'
+            data.save()
+            messages.success(request, 'Your News has been Added successfuly')
+            return HttpResponseRedirect('/user/mynews')
+        else:
+            messages.error(request, 'News Form Eror. Please Check; <br>' + str(form.errors))
+            return HttpResponseRedirect('/user/addnews')
+    else:
+        category = Category.objects.all()
+        form = NewsForm()
+        setting = Setting.objects.get(pk=1)
+        context = {
+        'category': category,
+        'form': form,
+        'setting': setting,
+        }
+        return render(request, 'user_add_news.html', context)
+
+@login_required(login_url='/login')
+def news_edit(request, id):
+    news = News.objects.get(id=id)
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES, instance=news)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your News has been updated successfuly')
+            return HttpResponseRedirect('/user/mynews')
+        else:
+            messages.error(request, 'News Form Eror. Please Check; <br>' + str(form.errors))
+            return HttpResponseRedirect('/user/news_edit' + str(id))
+    else:
+        category = Category.objects.all()
+        form = NewsForm(instance=news)
+        setting = Setting.objects.get(pk=1)
+        context = {
+        'category': category,
+        'form': form,
+        'setting': setting,
+        }
+        return render(request, 'user_add_news.html', context)
+
+
+def news_delete(request,id):
+    current_user = request.user
+    News.objects.filter(id=id, user_id=current_user.id).delete()
+    messages.success(request, 'Your News has been deleted successfuly.')
+    return HttpResponseRedirect('/user/mynews')

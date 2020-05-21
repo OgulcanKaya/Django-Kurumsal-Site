@@ -1,14 +1,16 @@
 from django.contrib.auth.models import User
 from django.db import models
+from ckeditor.widgets import CKEditorWidget
 
 
 # Create your models here.
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from django.forms import TextInput, Select, FileInput, EmailInput, ModelForm
 
 
 class Category(MPTTModel):
@@ -114,3 +116,18 @@ class CommentForm(ModelForm):
         class Meta:
             model = Comment
             fields = ['subject', 'comment', 'rate']
+
+class NewsForm(ModelForm):
+    class Meta:
+        model = News
+        fields = ('category', 'title', 'description', 'keyword', 'slug',  'image', 'detail',)
+        widgets = {
+            'category': Select(attrs={'class=form-control valid': 'input', 'placeholder': 'category'}),
+            'title': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Title'}),
+            'description': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Description'}),
+            'keyword': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Keyword'}),
+            'slug': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Slug'}),
+            'image': FileInput(attrs={'class': 'input', 'placeholder': 'Image'}),
+            'detail': CKEditorWidget(),
+
+        }

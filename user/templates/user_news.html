@@ -1,0 +1,106 @@
+
+
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} {{ profile.first_name}} Comments {% endblock %}
+{% block keywords %} {% endblock %}
+{% block description %}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+
+
+{% endblock %}
+
+{% block body%}
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2> Change Your İnformations</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888">
+                        <p style="color:#a6e1ec ">{{ message| safe }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-8" style="background-color: #faf0e6">
+                    <h1 id="comments_title" class="center">{{ profile.first_name}} Comments</h1>
+                    <!-- İçerik Başlangıç -->
+                    <div class="blog-content">
+
+                        <table style="width: 100%">
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Slug</th>
+                                <th>Category</th>
+                                <th>Status</th>
+
+                                <th>Date</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            {% for rs in news %}
+                                <tr>
+
+                                    <th class="text-left">
+                                        <a href="/news/{{ rs.id }}/{{ rs.id }}"> <img src="{{ rs.image.url }}"style="height: 50px; width: 75px"></a>
+                                    </th>
+                                    <th class="text-left">
+                                        <a href="/news/{{ rs.id }}/{{ rs.slug }}"> {{ rs.title}} </a>
+                                    </th>
+                                    <th class="text-left" style="color: black"> {{ rs.slug }} </a> </th>
+                                    <th class="text-left" style="color: black"> {{ rs.category }} </a> </th>
+                                    <th class="text-left" style="color: black">{{ rs.status }} </a> </th>
+
+                                    <th class="text-left" style="color: black">{{ rs.created_at }} </a> </th>
+                                    <td class="text-left">
+                                        <a class="btn btn btn-primary button" href="/user/news_edit/{{ rs.id }}" > Edit</a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a class="btn btn btn-primary button" href="/user/news_delete/{{ rs.id }}" onclick="return confirm('Will be Delete! Are you sure?')"> Delete</a>
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                    <!-- İçerik Bitiş -->
+                </div><!--/.row-->
+
+
+                <aside class="col-md-4">
+                    <div class="widget search">
+                        <form role="form">
+                            <input type="text" class="form-control search_box" autocomplete="off" placeholder="Search Here">
+                        </form>
+                        <div style="padding-top: 10px ">
+                            <ul class="blog_category">
+                                <li><a class="btn btn btn-primary button" href="/user/addnews" > Add News </a></li>
+                            </ul>
+                        </div>
+                        {% include 'userpanel.html' %}
+                    </div>
+
+
+
+
+                </aside>
+
+
+            </div><!--/.row-->
+
+        </div><!--/.blog-->
+
+    </section><!--/#blog-->
+
+
+{% endblock %}

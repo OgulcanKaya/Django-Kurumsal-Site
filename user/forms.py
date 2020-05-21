@@ -1,9 +1,11 @@
+
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import TextInput, Select, FileInput, EmailInput
 
 from Home.models import UserProfile
+from news.models import News
 
 
 class UserUpdateForm(UserChangeForm):
@@ -26,6 +28,7 @@ CITY = [
     ('Mersin', 'Mersin'),
     ('Karabük', 'Karabük'),
 ]
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile

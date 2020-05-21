@@ -1,0 +1,71 @@
+
+
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} {{ profile.first_name}} Add News {% endblock %}
+{% block keywords %} {% endblock %}
+{% block description %}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+
+{% endblock %}
+
+{% block body%}
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2> Add News</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888">
+                        <p style="color:#a6e1ec ">{{ message| safe }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-9">
+                    <h1 id="comments_title" class="center">You can add newsfrom here.</h1>
+                    <!-- İçerik Başlangıç -->
+                    <div class="blog-content">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                {{ form.media }} <!-- ckeditor ayarlarını getirir-->
+                                {{ form.as_p }}
+                            </fieldset>
+                            <div class="form-group">
+
+                                <button class="btn btn btn-primary button" type="submit"> Add News</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- İçerik Bitiş -->
+                </div><!--/.row-->
+
+
+                <aside class="col-md-3">
+                    <div class="widget search">
+                        <form role="form">
+                            <input type="text" class="form-control search_box" autocomplete="off" placeholder="Search Here">
+                        </form>
+                    </div><!--/.search-->
+
+
+                    {% include 'userpanel.html' %}
+
+
+                </aside>
+
+
+            </div><!--/.row-->
+
+        </div><!--/.blog-->
+
+    </section><!--/#blog-->
+
+
+{% endblock %}
