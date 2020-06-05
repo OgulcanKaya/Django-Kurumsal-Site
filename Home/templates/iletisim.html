@@ -43,11 +43,8 @@
                                         <div class="form-group">
                                             {% csrf_token %}
                                             {{ form.as_p }}
-                                            {% if user.id is not None %}
                                             <input class="btn btn-primary btn-lg"type="submit" value="SEND MESSAGE">
-                                        {% else%}
-                                            Mesaj Göndermek İçin Lütfen <a href="/login">Login </a> Olunuz!
-                                        {% endif %}
+
 
                                         </div>
 

@@ -55,8 +55,15 @@ class News(models.Model):
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
+    TYPE = (
+
+        ('Haber', 'Haber'),
+        ('Etkinlik', 'Etkinlik'),
+        ('Duyuru', 'Duyuru'),
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE) #relations with Category
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    type = models.CharField(max_length=30, choices=TYPE, null=True)
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=200)
     keyword = models.CharField(max_length=200)
@@ -130,9 +137,10 @@ class CommentForm(ModelForm):
 class NewsForm(ModelForm):
     class Meta:
         model = News
-        fields = ('category', 'title', 'description', 'keyword', 'slug',  'image', 'detail',)
+        fields = ('category', 'type', 'title', 'description', 'keyword', 'slug',  'image', 'detail',)
         widgets = {
             'category': Select(attrs={'class=form-control valid': 'input', 'placeholder': 'category'}),
+            'type': Select(attrs={'class=form-control valid': 'input', 'placeholder': 'type'}),
             'title': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Title'}),
             'description': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Description'}),
             'keyword': TextInput(attrs={'class=form-control valid': 'input', 'placeholder': 'Keyword'}),

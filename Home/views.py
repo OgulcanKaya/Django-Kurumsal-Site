@@ -12,10 +12,10 @@ import json
 def index(request):
 
     setting = Setting.objects.get(pk=1)
-    sliderdata = News.objects.all().order_by('?')[:8]
     category = Category.objects.all()
-    daynews=News.objects.all().order_by('-id')[:8]
-    randomnews = News.objects.all().order_by('?')[:8]
+    sliderdata = News.objects.filter(type='Haber',status='True').order_by('?')[:4]
+    daynews = News.objects.filter(type='Etkinlik', status='True').order_by('?')[:4]
+    randomnews = News.objects.filter(type='Duyuru', status='True').order_by('-id')[:4]
     comment = Comment.objects.all().order_by('-id')[:6]
     context = {'setting': setting,
                'category': category,
@@ -85,7 +85,7 @@ def category_news(request,id,slug):
         'setting': setting,
         'comment': comment,
     }
-    return render(request, 'contents.html', context)
+    return render(request, 'all_contents.html', context)
 
 #********************** Her içeriğin Detayının Gösterilmesi ***********************
 def news_detail(request,id,slug):

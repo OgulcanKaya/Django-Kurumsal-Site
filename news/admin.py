@@ -20,9 +20,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'status', 'image_tag', 'slug', 'user']
+    list_display = ['title', 'category', 'type','status', 'image_tag', 'slug', 'user']
     readonly_fields = ('image_tag',)
-    list_filter = ['status', 'category','user']
+    list_filter = ['status', 'category','user','type']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [NewsImageInline]
 

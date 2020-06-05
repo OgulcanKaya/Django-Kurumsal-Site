@@ -51,7 +51,7 @@ class ContactFormMassage(models.Model):
         name = models.CharField(max_length=150)
         email = models.CharField(max_length=200)
         subject = models.CharField(max_length=200)
-        message = models.CharField(max_length=50)
+        message = models.CharField(max_length=250)
         status = models.CharField(max_length=10, choices= STATUS)
         ip = models.CharField(blank=True, max_length=15)
         note = models.CharField(blank=True, max_length=15)

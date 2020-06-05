@@ -80,7 +80,7 @@
             </div>
 
             <div class="collapse navbar-collapse navbar-right">
-                <a class="navbar-brand" href="/"><img src="{% static 'images/logo1.png'%}" style="height: 60pt;width: 100px;"  alt="logo"></a>
+                <a class="navbar-brand" href="/"><img src="{% static 'images/logo1.png'%}" style="height: 60pt;width: 75px;"  alt="logo"></a>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Anasayfa</a></li>
                     {% load mptt_tags %}
@@ -106,6 +106,7 @@
                                 <li><a href="/user"><img src="{{ user.userprofile.image.url}}" height="60px" class="img-circle"> {{user.first_name}} {{user.last_name}} </a></li>
                                 <li><a href="/user/comments/">My Comments <span class="badge"></span></a></li>
                                 <li><a href="/user/mynews">My Content <span class="badge"></span></a></li>
+                                <li><a href="/user/addnews" > Add Content </a></li>
                                 <li><a href="/logout/"><i class="fa fa-sign-out"> </i>  Logout</a></li>
                             </ul>
                         </li>
