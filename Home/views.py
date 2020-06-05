@@ -12,7 +12,6 @@ import json
 def index(request):
 
     setting = Setting.objects.get(pk=1)
-    setting2 = Setting.objects.get(pk=1)
     sliderdata = News.objects.all().order_by('?')[:8]
     category = Category.objects.all()
     daynews=News.objects.all().order_by('-id')[:8]
@@ -23,7 +22,7 @@ def index(request):
                'page': 'Home',
                'daynews': daynews,
                'randomnews': randomnews,
-               'setting2': setting2,
+
                'sliderdata': sliderdata,
                 'comment': comment}
     return render(request, 'index.html', context)
@@ -69,7 +68,9 @@ def iletisim(request):
                'form': form}
     return render(request, 'iletisim.html', context)
 
-def category_news(request,id,slug):     #********************** Her içeriğin listelenerek Gösterilmesi ***********************
+
+#********************** Her kategorideki içeriklerin listelenerek Gösterilmesi ***********************
+def category_news(request,id,slug):
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
     news = News.objects.filter(category_id = id)
@@ -86,7 +87,8 @@ def category_news(request,id,slug):     #********************** Her içeriğin l
     }
     return render(request, 'contents.html', context)
 
-def news_detail(request,id,slug): #********************** Her içeriğin Detayının Gösterilmesi ***********************
+#********************** Her içeriğin Detayının Gösterilmesi ***********************
+def news_detail(request,id,slug):
     category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
     news = News.objects.get(pk=id)
@@ -101,7 +103,9 @@ def news_detail(request,id,slug): #********************** Her içeriğin Detayı
     }
     return render(request, 'newsdetail.html', context)
 
-def news_search(request):   #**********************  içeriğin Detayının Gösterilmesi ***********************
+
+ #**********************  Arama fonksiyonu ***********************
+def news_search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -120,6 +124,8 @@ def news_search(request):   #**********************  içeriğin Detayının Gös
 
     return HttpResponseRedirect('/')
 
+
+ #**********************  Aramada Otomatik tamamlama fonksiyonu ***********************
 def news_search_auto(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
@@ -139,8 +145,8 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-
-def login_view(request):  #**********************  Kullanıcı Giriş yapma Sayfası ***********************
+#**********************  Kullanıcı Giriş yapma Sayfası ***********************
+def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -160,7 +166,9 @@ def login_view(request):  #**********************  Kullanıcı Giriş yapma Sayf
                }
     return render(request, 'login.html', context)
 
-def register_view(request):  #**********************  Kullanıcı Kayıt olma Sayfası ***********************
+
+#**********************  Kullanıcı Kayıt olma Sayfası ***********************
+def register_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():

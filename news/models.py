@@ -89,6 +89,7 @@ class Images(models.Model):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Image'
 
+
 class NewsImageForm(ModelForm):
     class Meta:
         model = Images
@@ -118,11 +119,14 @@ class Comment(models.Model):
     def category(self):
         return self.news.category
 
+
+#Kullanıcının yeni yorum eklemesi için kullanucağı form
 class CommentForm(ModelForm):
         class Meta:
             model = Comment
             fields = ['subject', 'comment', 'rate']
 
+#Kullanıcının yeni içerik girmesi için kullanucağı form
 class NewsForm(ModelForm):
     class Meta:
         model = News
