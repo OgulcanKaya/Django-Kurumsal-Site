@@ -16,7 +16,7 @@
 
     <section id="blog" class="container">
         <div class="center">
-            <h2> Change Your İnformations</h2>
+            <h2> You can See & Add Your Contents!</h2>
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-warning{{ message.tags }}" role="alert" style="background-color: #888888">
@@ -29,7 +29,7 @@
         <div class="blog">
             <div class="row">
                 <div class="col-md-8" style="background-color: #faf0e6">
-                    <h1 id="comments_title" class="center">{{ profile.first_name}} Comments</h1>
+                    <h1 id="comments_title" class="center">{{ profile.first_name}} Contents</h1>
                     <!-- İçerik Başlangıç -->
                     <div class="blog-content">
 
@@ -89,7 +89,7 @@
                         </form>
                         <div style="padding-top: 10px ">
                             <ul class="blog_category">
-                                <li><a class="btn btn btn-primary button" href="/user/addnews" > Add News </a></li>
+                                <li><a class="btn btn btn-primary button" href="/user/addnews" > Add Content </a></li>
                             </ul>
                         </div>
                         {% include 'userpanel.html' %}
