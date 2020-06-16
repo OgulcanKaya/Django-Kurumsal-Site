@@ -73,7 +73,7 @@ def iletisim(request):
 def category_news(request,id,slug):
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
-    news = News.objects.filter(category_id = id)
+    news = News.objects.filter(category_id = id, status='True')
     news2 = News.objects.all()
     setting = Setting.objects.get(pk=1)
     comment = Comment.objects.filter(news__category_id=id, status='True')
@@ -91,7 +91,7 @@ def category_news(request,id,slug):
 def news_detail(request,id,slug):
     category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
-    news = News.objects.get(pk=id)
+    news = News.objects.get(pk=id, status='True')
     images = Images.objects.filter(news_id=id)
     comment = Comment.objects.filter(news_id=id, status='True')
     context = {

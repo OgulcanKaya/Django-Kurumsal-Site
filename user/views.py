@@ -139,6 +139,7 @@ def add_news(request):
             data.description = form.cleaned_data['description']
             data.image = form.cleaned_data['image']
             data.category = form.cleaned_data['category']
+            data.type = form.cleaned_data['type']
             data.slug = form.cleaned_data['slug']
             data.detail = form.cleaned_data['detail']
             data.status = 'False'

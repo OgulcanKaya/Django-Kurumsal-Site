@@ -2,63 +2,58 @@
 <section id="bottom">
     <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-8">
                 <div class="widget">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">We are hiring</a></li>
-                        <li><a href="#">Meet the team</a></li>
-                        <li><a href="#">Copyright</a></li>
-                        <li><a href="#">Terms of use</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Contact us</a></li>
+                        <li class="active"><a href="/">Anasayfa</a></li>
+                        <li><a href="/hakkimizda">Hakkımızda</a></li>
+                        <li><a href="/referanslar">Referanslarımız</a></li>
+                        <li><a href="/iletisim">İletişim</a></li>
+                        <li><a href="/SSS"> SSS</a></li>
                     </ul>
                 </div>
             </div><!--/.col-md-3-->
 
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-8" style="margin-left: 150px">
                 <div class="widget">
-                    <h3>Support</h3>
-                    <ul>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Refund policy</a></li>
-                        <li><a href="#">Ticket system</a></li>
-                        <li><a href="#">Billing system</a></li>
-                    </ul>
+                    <h3>Our Contents</h3>
+                    <ul class="nav navbar-nav">
+
+                        {% load mptt_tags %}
+                        {% recursetree category %}
+                            <li class="dropdown">
+                                <a href="/category/{{ node.id }}/{{ node.slug }}" {% if not node.is_leaf_node %} class="dropdown" {% endif %}>{{ node.title }}  {% if not node.is_leaf_node %}<i class="fa fa-angle-down"></i>{% endif %}</a>
+                                {% if not node.is_leaf_node %}
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ children }}</a></li>
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
                 </div>
             </div><!--/.col-md-3-->
 
-            <div class="col-md-3 col-sm-6">
+            <div style="margin-left: 1000px">
                 <div class="widget">
-                    <h3>Developers</h3>
-                    <ul>
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">SEO Marketing</a></li>
-                        <li><a href="#">Theme</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Email Marketing</a></li>
-                        <li><a href="#">Plugin Development</a></li>
-                        <li><a href="#">Article Writing</a></li>
-                    </ul>
-                </div>
-            </div><!--/.col-md-3-->
+                    <h3>User</h3>
+                    {% if user.id is not None %}
 
-            <div class="col-md-3 col-sm-6">
-                <div class="widget">
-                    <h3>Our Partners</h3>
-                    <ul>
-                        <li><a href="#">Adipisicing Elit</a></li>
-                        <li><a href="#">Eiusmod</a></li>
-                        <li><a href="#">Tempor</a></li>
-                        <li><a href="#">Veniam</a></li>
-                        <li><a href="#">Exercitation</a></li>
-                        <li><a href="#">Ullamco</a></li>
-                        <li><a href="#">Laboris</a></li>
-                    </ul>
+                        <ul >
+                            <li><a href="/user"><img src="{{ user.userprofile.image.url}}" height="60px" class="img-circle"> {{user.first_name}} {{user.last_name}} </a></li>
+                            <li><a href="/user/comments/">My Comments <span class="badge"></span></a></li>
+                            <li><a href="/user/mynews">My Content <span class="badge"></span></a></li>
+                            <li><a href="/user/addnews" > Add Content </a></li>
+                            <li><a href="/logout/"><i class="fa fa-sign-out"> </i>  Logout</a></li>
+                        </ul>
+
+                    {% else %}
+                        <ul >
+                            <li><a href="/login/"><i class="fa fa-unlock"> </i>  Login</a></li>
+                            <li><a href="/register/"><i class="fa fa-sign-in"> </i>  Sign up</a></li>
+                        </ul>
+
+                    {% endif %}
                 </div>
             </div><!--/.col-md-3-->
         </div>
