@@ -50,12 +50,6 @@
 
 
                 <aside class="col-md-4">
-                    <div class="widget search">
-                        <form role="form">
-                            <input type="text" class="form-control search_box" autocomplete="off" placeholder="Search Here">
-                        </form>
-                    </div><!--/.search-->
-
                     <div class="widget categories">
                         <h3>Recent Comments</h3>
                         <div class="row">
@@ -81,12 +75,10 @@
                         </div>
                     </div><!--/.recent comments-->
 
-
-
                     <div class="widget blog_gallery">
                         <h3>Other Contents</h3>
                         <ul class="sidebar-gallery">{% for rs in news2 %}
-                            <li><a href="/news/{{ rs.id }}/{{ rs.slug }}" title="{{ rs.title }}"><img src="{{ rs.image.url }}" style="width: 120px" height=" 80 px" /></a></li>
+                            <li><a href="/news/{{ rs.id }}/{{ rs.slug }}" title="{{ rs.title }}&#10;{{ rs.category }}"><img src="{{ rs.image.url }}" style="width: 120px" height=" 80 px" /></a></li>
                         {% endfor %}
                         </ul>
                     </div><!--/.blog_gallery-->

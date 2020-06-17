@@ -16,8 +16,8 @@
 
     <section id="contact-info">
         <div class="center">
-            <h2> {{setting.company}} İletişim Sayfasına Hoşgeldiniz! </h2>
-            <p class="lead">{{setting.title}}</p>
+            <h2> {{setting.company}}  </h2><br>
+            <p class="lead"> İletişim Sayfasına Hoşgeldiniz! Aşağıdaki Formu Kullanarak Bizimle İletişime Geçebilirsiniz!</p>
         </div>
         <div class="gmap-area">
             <div class="container">
@@ -26,7 +26,7 @@
                         <div class="container">
                             <div class="col-md-4">
                                 <h2>Bizimle Buradan İletişime Geçebilirsiniz.</h2>
-                                <p class="lead">Mesajınız En Kısa Sürede Cevaplanacaktır!</p>
+                                <p class="lead">Mesajınız En Kısa Sürede Yetkililer Tarafından Cevaplanacaktır!</p>
 
 
                                 {% if messages %}
@@ -39,15 +39,11 @@
                                 {% endif %}
 
                                 <form class="contact-form" method="post" action="">
-                                    <div class="col-sm-5 col-sm-offset-1">
-                                        <div class="form-group">
+                                    <div class="col-sm-6 ">
+
                                             {% csrf_token %}
                                             {{ form.as_p }}
                                             <input class="btn btn-primary btn-lg"type="submit" value="SEND MESSAGE">
-
-
-                                        </div>
-
                                     </div>
                                 </form>
 
