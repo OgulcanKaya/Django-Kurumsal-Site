@@ -41,9 +41,8 @@
 
                         <ul >
                             <li><a href="/user"><img src="{{ user.userprofile.image.url}}" height="60px" class="img-circle"> {{user.first_name}} {{user.last_name}} </a></li>
-                            <li><a href="/user/comments/">My Comments <span class="badge"></span></a></li>
                             <li><a href="/user/mynews">My Content <span class="badge"></span></a></li>
-                            <li><a href="/user/addnews" > Add Content </a></li>
+                            <li><a href="/user/comments/">My Comments <span class="badge"></span></a></li>
                             <li><a href="/logout/"><i class="fa fa-sign-out"> </i>  Logout</a></li>
                         </ul>
 
@@ -68,9 +67,12 @@
             </div>
             <div class="col-sm-6">
                 <ul class="pull-right">
-                    <li><a href="/">Ana Sayfa</a></li>
+
                     <li><a href="/iletisim">İletişim</a></li>
                     <li><a href="/SSS">SSS</a></li>
+                    <li><a href="{{ setting.facebook}}"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="{{ setting.twitter}}"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="{{ setting.instagram}}"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
         </div>
