@@ -14,7 +14,7 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
     sliderdata = News.objects.filter(type='Haber',status='True').order_by('?')
-    sliderdata2 = News.objects.get(type='Haber',id=1)
+    sliderdata2 = News.objects.get(type='Haber',id=14)
     activity = News.objects.filter(type='Etkinlik', status='True').order_by('?')[:4]
     announcement = News.objects.filter(type='Duyuru', status='True').order_by('-id')[:4]
     comment = Comment.objects.filter(status='True').order_by('-id')[:6]

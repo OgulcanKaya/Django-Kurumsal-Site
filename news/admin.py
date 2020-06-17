@@ -21,7 +21,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'type','status', 'image_tag', 'slug', 'user']
-    readonly_fields = ('image_tag',)
+    readonly_fields = ['image_tag','category', 'type','user']
     list_filter = ['status', 'category','user','type']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [NewsImageInline]
@@ -70,6 +70,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject', 'category', 'comment', 'news', 'user', 'status']
     list_filter = ['status']
+    readonly_fields = ['subject', 'comment', 'rate',]
 
 
 
