@@ -4,12 +4,12 @@
     <div class="container" style=" background-image: url({% static 'images/partners/partner_bg.png'%}); width: 100%; height:100%;">
         <div class="center wow fadeInDown">
             <br><br>
-            <h2 style="color:#192841">Son Etkinlikler</h2>
+            <h2 style="color:#192841">Etkinlikler</h2>
             <h3 class="lead" style="color:#192841"> Sitemize Eklenen Etkinliklere Buradan Ulaşabilirsiniz.</h3>
         </div>
 
         <div class="row" >
-            {% for rs in daynews %}
+            {% for rs in activity %}
                 <div class="col-xs-9 col-sm-6 col-md-3">
                     <div class="recent-work-wrap">
                         <img class="media_image" src="{{ rs.image.url }}" height="200px" alt="">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="row">
-            {% for rs in randomnews %}
+            {% for rs in announcement %}
                 <div class="col-xs-9 col-sm-6 col-md-3 center-block">
                     <div class="recent-work-wrap">
                         <img class="media_image" src="{{ rs.image.url }}" height="200px" alt="">
@@ -55,7 +55,7 @@
     </div><!--/.container-->
 </section><!--/#recent-works-->
 <section id="partner">
-    <h1 class="center-block" style="color: white">Last Comments</h1><br>
+    <h1 class="center-block" style="color: white">Yapılan Son Yorumlar</h1><br>
     <div class="row">
         <div class="container" >
             <div class="row">
@@ -100,7 +100,7 @@
 <section id="partner">
     <div class="container">
         <div class="center wow fadeInDown">
-            <h2>{{setting.title  }} Some References</h2>
+            <h2>{{setting.title  }} / Bazı Önemli Referannslarımız</h2>
         </div>
 
         <div class="center" style="height:600pt; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">

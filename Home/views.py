@@ -13,18 +13,19 @@ def index(request):
 
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
-    sliderdata = News.objects.filter(type='Haber',status='True').order_by('?')[:4]
-    daynews = News.objects.filter(type='Etkinlik', status='True').order_by('?')[:4]
-    randomnews = News.objects.filter(type='Duyuru', status='True').order_by('-id')[:4]
-    comment = Comment.objects.all().order_by('-id')[:6]
+    sliderdata = News.objects.filter(type='Haber',status='True').order_by('?')
+    sliderdata2 = News.objects.get(type='Haber',id=1)
+    activity = News.objects.filter(type='Etkinlik', status='True').order_by('?')[:4]
+    announcement = News.objects.filter(type='Duyuru', status='True').order_by('-id')[:4]
+    comment = Comment.objects.filter(status='True').order_by('-id')[:6]
     context = {'setting': setting,
                'category': category,
                'page': 'Home',
-               'daynews': daynews,
-               'randomnews': randomnews,
-
+               'activity': activity,
+               'announcement': announcement,
                'sliderdata': sliderdata,
-                'comment': comment}
+               'sliderdata2': sliderdata2,
+               'comment': comment}
     return render(request, 'index.html', context)
 
 
@@ -74,7 +75,7 @@ def category_news(request,id,slug):
     category = Category.objects.all()
     categorydata = Category.objects.get(pk=id)
     news = News.objects.filter(category_id = id, status='True')
-    news2 = News.objects.all()
+    news2 = News.objects.filter(status='True').order_by('?')
     setting = Setting.objects.get(pk=1)
     comment = Comment.objects.filter(news__category_id=id, status='True')
     context = {
@@ -104,7 +105,7 @@ def news_detail(request,id,slug):
     return render(request, 'newsdetail.html', context)
 
 
- #**********************  Arama fonksiyonu ***********************
+#**********************  Arama fonksiyonu ***********************
 def news_search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -125,7 +126,7 @@ def news_search(request):
     return HttpResponseRedirect('/')
 
 
- #**********************  Aramada Otomatik tamamlama fonksiyonu ***********************
+#**********************  Aramada Otomatik tamamlama fonksiyonu ***********************
 def news_search_auto(request):
     if request.is_ajax():
         q = request.GET.get('term', '')

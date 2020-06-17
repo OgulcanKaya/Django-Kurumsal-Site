@@ -13,6 +13,28 @@
 
     <div class="carousel slide">
         <div id="myCarousel" style="background-color: #00010a">
+            <div class="item active " style="background-color: #00010a">
+                <div class="container">
+                    <div class="row slide-margin">
+                        <div class="col-sm-6">
+                            <div class="carousel-content">
+                                <h1 >{{ sliderdata2.title }}</h1>
+                                <h2>{{ sliderdata2.description }}</h2>
+                                <a class="btn-slide animation animated-item-3" href="/news/{{ sliderdata2.id }}/{{ sliderdata2.slug}}">İçeriğe Git</a>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 hidden-xs animation animated-item-4">
+                            <div class="slider-img">
+                                <img src="{{ sliderdata2.image.url }}" class="img-responsive" style="height: 350px " width="650 px" >
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--/.item-->
+
 
             {{ count }}
             {% for rs in sliderdata %}
