@@ -1,1 +1,2 @@
-"# DjangoProje-KurumsalSite" Ramazan Oğulcan Kaya 2015010206062
+"# Django-KurumsalSite" 
+Bu Kurumsal Haber,Etkinlik ve Duyuru Web sitesi Django Framework'ü ile geliştirilmiştir
