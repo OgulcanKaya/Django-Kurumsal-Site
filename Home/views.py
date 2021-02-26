@@ -55,6 +55,7 @@ def iletisim(request):
             data.email = form.cleaned_data['email']
             data.subject = form.cleaned_data['subject']
             data.message = form.cleaned_data['message']
+            data.status = 'New'
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             messages.success(request, "Mesajınız başarı ile gönderilmiştir. Teşekkür ederiz !")
@@ -112,6 +113,7 @@ def news_search(request):
         if form.is_valid():
             query = form.cleaned_data['query']
             category = Category.objects.all()
+            setting = Setting.objects.get(pk=1)
             catid = form.cleaned_data['catid']
             if catid == 0:
                 news = News.objects.filter(title__icontains=query)
@@ -120,6 +122,7 @@ def news_search(request):
             context = {
                 'news': news,
                 'category': category,
+                'setting': setting,
             }
             return render(request, 'news_search.html', context)
 
